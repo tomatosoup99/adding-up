@@ -2,8 +2,16 @@
 const fs = require('fs');
 const readline = require('readline');
 const rs = fs.ReadStream('./popu-pref.csv');
-const r1 = readline.createInterface({'input': rs, 'output':{} });
-r1.on('line', (lineString) => {
-    console.log(lineString);
+const rl = readline.createInterface({'input': rs, 'output':{} });
+rl.on('line', (lineString) => {
+    const columns = lineString.split(',');
+    const year = parseInt(columns[0]);
+    const prefecture = columns[2];
+    const popu = parseInt(columns[7]);
+    if (year === 2010 || year === 2015) {
+        console.log(year);
+        console.log(prefecture);
+        console.log(popu);
+    }
 });
-r1.resume();
+rl.resume();
